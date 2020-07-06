@@ -1,0 +1,50 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  perspective: 1600px; }
+
+h1 {
+  margin-bottom: 300px; }
+
+.cylinder {
+  transform-style: preserve-3d;
+  transform: rotateY(-80deg); }
+
+.disc {
+  transform-style: preserve-3d; }
+
+.tile {
+  transform-origin: 24px 24px 8px;
+  position: relative;
+  transform-style: preserve-3d; }
+  .tile > * {
+    height: 48px;
+    width: 48px;
+    background-color: rgba(222, 184, 135, 0.678);
+    border: 1px solid #000;
+    position: absolute;
+    transform-origin: top left; }
+  .tile .side {
+    width: 16px;
+    background-color: rgba(255, 0, 0, 0.301); }
+  .tile .front {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px; }
+    .tile .front span {
+      user-select: none; }
+  .tile .back {
+    transform: translateZ(-16px); }
+  .tile .left {
+    background-color: rgba(255, 0, 221, 0.5);
+    transform: rotateY(90deg); }
+  .tile .right {
+    background-color: rgba(255, 238, 0, 0.5);
+    transform: rotateY(90deg) translateZ(48px); }

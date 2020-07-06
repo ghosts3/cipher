@@ -1,0 +1,44 @@
+//- create a single tile with a position and a rotation about the Z axis
+//- num - the tile number, value 0 - 25, which is converted to a capital letter from A-Z 
+//- x - x coordinate of tile
+//- y - y coordinate of tile
+//- rotate - angle of z rotation
+mixin tile(num, x, y, rotate)
+  - const asciiA = 64
+  div(class='tile' style=`transform: translateX(${x}px) translateY(${y}px) rotateZ(${rotate}deg) rotateY(90deg)`)
+    .front #[span #{String.fromCharCode(asciiA + num)}]
+    .back
+    div(class='left side')
+    div(class='right side')
+
+mixin disc(i, numTiles, radius, offset)
+  - const theta = 2 * Math.PI / numTiles
+  div(id=`${i}` class='disc' style=`transform: translateZ(${offset}px)`)
+    - for (let i = 1; i <= numTiles; i++)
+      - let x = Math.floor(radius * Math.cos(i * theta))
+      - let y = Math.floor(radius * Math.sin(i * theta))
+      - let rotate = Math.floor(360 / numTiles * i)
+      +tile(i, x, y, rotate)
+
+mixin cylinder(num)
+  .cylinder
+    - const numTiles = 26
+    - const radius = 200
+    - const offset = 50
+
+    -for (var i = 0; i < num; i++)
+      +disc(i, numTiles, radius, i*offset)
+
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href='css/styles.css')
+    title Cipher
+  body
+    h1 Cipher
+    +cylinder(4)
+    script(src='scripts/main.js')
+
+
